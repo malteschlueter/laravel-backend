@@ -28,6 +28,14 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
      */
     public function boot() {
 
+        $this->setRouting();
+
+        $views_path = __DIR__ . '/../views';
+        $this->loadViewsFrom($views_path, 'backend');
+    }
+
+    protected function setRouting() {
+
         $routeConfig = [
             'namespace' => 'Mschlueter\Backend\Controllers',
             'prefix' => $this->getConfig()->get('backend.route_prefix'),
@@ -80,12 +88,12 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 
             $router->get('register', [
                 'uses' => 'Auth\RegisterController@showRegistrationForm',
-                'as' => 'backend.password.register',
+                'as' => 'backend.register',
             ]);
 
             $router->post('register', [
                 'uses' => 'Auth\RegisterController@register',
-//                'as' => 'backend.password.register',
+//                'as' => 'backend.register',
             ]);
         });
     }

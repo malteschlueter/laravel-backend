@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('backend::layouts.app')
 
 @section('content')
 <div class="container">
@@ -13,7 +13,7 @@
                         </div>
                     @endif
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('password.email') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('backend.password.email') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">

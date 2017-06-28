@@ -11,7 +11,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth.backend');
+        $this->middleware('auth');
     }
 
     /**
@@ -20,6 +20,6 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function indexAction() {
-        return view('home');
+        return view('backend::home');
     }
 }

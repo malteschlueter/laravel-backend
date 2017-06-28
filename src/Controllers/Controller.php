@@ -9,4 +9,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends \Illuminate\Routing\Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    protected function redirectTo() {
+        return '/admin';
+    }
 }
