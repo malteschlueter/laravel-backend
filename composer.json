@@ -1,0 +1,14 @@
+{
+    "name": "mschlueter/laravel-backend",
+    "type": "library",
+    "require": {
+        "php": ">=7.1"
+    },
+    "authors": [
+        {
+            "name": "Malte Schlüter",
+            "email": "git@schlueter-malte.de"
+        }
+    ],
+    "minimum-stability": "stable"
+}

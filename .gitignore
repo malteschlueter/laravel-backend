@@ -1,4 +1,4 @@
-# General
-*.DS_Store
-
-# Test
+/vendor
+composer.phar
+composer.lock
+.DS_Store
