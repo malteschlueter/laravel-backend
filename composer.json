@@ -2,7 +2,8 @@
     "name": "mschlueter/laravel-backend",
     "type": "library",
     "require": {
-        "php": ">=7.1"
+        "php": ">=7.1",
+        "illuminate/support": "5.4.*"
     },
     "authors": [
         {
@@ -10,5 +11,16 @@
             "email": "git@schlueter-malte.de"
         }
     ],
-    "minimum-stability": "stable"
+    "autoload": {
+        "psr-4": {
+            "Mschlueter\\Backend\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mschlueter\\Backend\\ServiceProvider"
+            ]
+        }
+    }
 }
