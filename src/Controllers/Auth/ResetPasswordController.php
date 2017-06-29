@@ -2,9 +2,9 @@
 
 namespace Mschlueter\Backend\Controllers\Auth;
 
+use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Mschlueter\Backend\Controllers\Controller;
-use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller
 {

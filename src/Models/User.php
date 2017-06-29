@@ -2,8 +2,8 @@
 
 namespace Mschlueter\Backend\Models;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Mschlueter\Backend\Notifications\Auth\ResetPassword as ResetPasswordNotification;
 
 class User extends Authenticatable

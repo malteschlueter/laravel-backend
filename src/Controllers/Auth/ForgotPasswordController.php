@@ -2,8 +2,8 @@
 
 namespace Mschlueter\Backend\Controllers\Auth;
 
-use Mschlueter\Backend\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Mschlueter\Backend\Controllers\Controller;
 
 class ForgotPasswordController extends Controller
 {
