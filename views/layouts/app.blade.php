@@ -28,7 +28,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ route('backend.home') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
@@ -36,7 +36,11 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        @if(Auth::check())
+
+                            <li><a href="{{ route('backend.user') }}">Benutzer</a></li>
+
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->

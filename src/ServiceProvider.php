@@ -101,6 +101,35 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
                 'uses' => 'Auth\RegisterController@register',
 //                'as' => 'backend.register',
             ]);
+
+            $router->get('users', [
+                'uses' => 'UserController@indexAction',
+                'as' => 'backend.user',
+            ]);
+            $router->get('users/create', [
+                'uses' => 'UserController@createAction',
+                'as' => 'backend.user.create',
+            ]);
+            $router->post('users', [
+                'uses' => 'UserController@storeAction',
+                'as' => 'backend.user.store',
+            ]);
+            $router->get('users/{user}/edit', [
+                'uses' => 'UserController@editAction',
+                'as' => 'backend.user.edit',
+            ]);
+            $router->put('users/{user}', [
+                'uses' => 'UserController@updateAction',
+                'as' => 'backend.user.update',
+            ]);
+            $router->get('users/{user}/delete', [
+                'uses' => 'UserController@destroyConfirmAction',
+                'as' => 'backend.user.destroyConfirm',
+            ]);
+            $router->delete('users/{user}', [
+                'uses' => 'UserController@destroyAction',
+                'as' => 'backend.user.destroy',
+            ]);
         });
     }
 
