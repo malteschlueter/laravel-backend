@@ -24,8 +24,6 @@
 
             </form>
 
-            @include('backend::layouts.partials.errors')
-
         </div>
     </div>
 </div>

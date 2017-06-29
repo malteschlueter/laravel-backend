@@ -25,7 +25,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
         $this->getConfig()->set('auth.providers.users.model', \Mschlueter\Backend\Models\User::class);
         $this->getConfig()->set('auth.providers.users.table', \Mschlueter\Backend\Models\User::class);
 
-        $assets_path = __DIR__ . '/../assets';
+        $assets_path = __DIR__ . '/../public';
 
         $this->publishes([
             $assets_path => public_path('vendor/backend')
@@ -41,7 +41,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 
         $this->setRouting();
 
-        $views_path = __DIR__ . '/../views';
+        $views_path = __DIR__ . '/../resources/views';
         $this->loadViewsFrom($views_path, 'backend');
 
         $migrations_path = __DIR__ . '/../database/migrations';

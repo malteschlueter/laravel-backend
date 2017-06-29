@@ -8,7 +8,7 @@
     {{-- CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Backend - {{ config('app.name', 'Laravel') }}</title>
 
     {{-- Styles --}}
     @section('include-css')
@@ -50,7 +50,10 @@
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ route('backend.login') }}">Login</a></li>
-                            <li><a href="{{ route('backend.register') }}">Register</a></li>
+
+                            @if(config('backend.allow_registration') === true)
+                                <li><a href="{{ route('backend.register') }}">Register</a></li>
+                            @endif
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -76,6 +79,8 @@
                 </div>
             </div>
         </nav>
+
+        @include('backend::layouts.partials.errors')
 
         @yield('content')
     </div>
