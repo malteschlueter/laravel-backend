@@ -37,6 +37,10 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
+        if(config('backend.allow_registration') !== true) {
+            return redirect()->route('backend.login')->withErrors(['It is not allowed to register.']);
+        }
+
         return view('backend::auth.register');
     }
 
@@ -63,6 +67,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if(config('backend.allow_registration') !== true) {
+            return redirect()->route('backend.login')->withErrors(['It is not allowed to register.']);
+        }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
