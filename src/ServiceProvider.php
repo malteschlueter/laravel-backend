@@ -23,6 +23,12 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
         ], 'backend');
 
         $this->getConfig()->set('auth.providers.users.model', \Mschlueter\Backend\Models\User::class);
+
+        $assets_path = __DIR__ . '/../assets';
+
+        $this->publishes([
+            $assets_path => public_path('vendor/backend')
+        ], 'public');
     }
 
     /**

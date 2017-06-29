@@ -12,8 +12,7 @@
 
     {{-- Styles --}}
     @section('include-css')
-        {{--<link href="{{ url(mix('css/backend.css')) }}" rel="stylesheet">--}}
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('vendor/backend/css/app.css') }}" rel="stylesheet">
     @show
 </head>
 <body>
@@ -83,8 +82,7 @@
 
     {{-- Scripts --}}
     @section('include-js')
-        {{--<script src="{{ url(mix('js/backend.js')) }}"></script>--}}
-        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('vendor/backend/js/app.js') }}"></script>
     @show
 </body>
 </html>
