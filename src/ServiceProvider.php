@@ -23,6 +23,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
         ], 'backend');
 
         $this->getConfig()->set('auth.providers.users.model', \Mschlueter\Backend\Models\User::class);
+        $this->getConfig()->set('auth.providers.users.table', \Mschlueter\Backend\Models\User::class);
 
         $assets_path = __DIR__ . '/../assets';
 
@@ -42,6 +43,9 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 
         $views_path = __DIR__ . '/../views';
         $this->loadViewsFrom($views_path, 'backend');
+
+        $migrations_path = __DIR__ . '/../database/migrations';
+        $this->loadMigrationsFrom($migrations_path);
 
         $this->app->singleton(\Illuminate\Contracts\Debug\ExceptionHandler::class, Handler::class);
     }
