@@ -47,6 +47,9 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
         $migrations_path = __DIR__ . '/../database/migrations';
         $this->loadMigrationsFrom($migrations_path);
 
+        $translations_path = __DIR__ . '/../resources/lang';
+        $this->loadTranslationsFrom($translations_path, 'backend');
+
         $this->app->singleton(\Illuminate\Contracts\Debug\ExceptionHandler::class, Handler::class);
     }
 
