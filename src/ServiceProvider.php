@@ -2,6 +2,8 @@
 
 namespace Mschlueter\Backend;
 
+use Mschlueter\Backend\Exceptions\Handler;
+
 class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 
     /**
@@ -19,6 +21,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
         $this->publishes([
             $config_file => config_path('backend.php')
         ], 'backend');
+
+        $this->getConfig()->set('auth.providers.users.model', \Mschlueter\Backend\Models\User::class);
     }
 
     /**
@@ -32,6 +36,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 
         $views_path = __DIR__ . '/../views';
         $this->loadViewsFrom($views_path, 'backend');
+
+        $this->app->singleton(\Illuminate\Contracts\Debug\ExceptionHandler::class, Handler::class);
     }
 
     protected function setRouting() {
