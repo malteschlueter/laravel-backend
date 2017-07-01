@@ -2,6 +2,7 @@
 
 namespace Mschlueter\Backend;
 
+use Mschlueter\Backend\Console\CreateUserCommand;
 use Mschlueter\Backend\Exceptions\Handler;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider {
@@ -30,6 +31,12 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
         $this->publishes([
             $assets_path => public_path('vendor/backend')
         ], 'public');
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                CreateUserCommand::class,
+            ]);
+        }
     }
 
     /**
