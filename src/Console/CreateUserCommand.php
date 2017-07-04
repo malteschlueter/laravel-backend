@@ -53,6 +53,8 @@ class CreateUserCommand extends Command {
 
         $this->user['password'] = bcrypt($password);
 
+        $this->user['active'] = true;
+
         $user = User::create($this->user);
 
         $user->notify(new UserCreated($password));

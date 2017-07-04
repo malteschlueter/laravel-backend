@@ -19,10 +19,7 @@ class CreateBackendUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('status', [
-                'active',
-                'inactive',
-            ])->default('inactive');
+            $table->boolean('active')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
