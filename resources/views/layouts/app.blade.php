@@ -42,7 +42,7 @@
                     <ul class="nav navbar-nav">
                         @if(Auth::check())
 
-                            <li><a href="{{ route('backend.user') }}">Benutzer</a></li>
+                            @include('backend::layouts.partials.nav-auth-checked')
 
                         @endif
                     </ul>
