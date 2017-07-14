@@ -4,6 +4,8 @@ return [
 
     'index' => [
 
+        'title' => 'Benutzer',
+
         'name' => 'Name',
 
         'email' => 'E-Mail Adresse',
@@ -36,6 +38,8 @@ return [
 
     'edit' => [
 
+        'title' => 'Benutzer ändern',
+
         'name' => [
             'label' => 'Name',
             'placeholder' => 'Name',
@@ -51,6 +55,8 @@ return [
     ],
 
     'destroy' => [
+
+        'title' => 'Benutzer löschen',
 
         'text' => 'Möchten Sie wirklich den Benutzer :name (:email) löschen?',
 

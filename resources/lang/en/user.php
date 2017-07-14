@@ -4,6 +4,8 @@ return [
 
     'index' => [
 
+        'title' => 'Users',
+
         'name' => 'Name',
 
         'email' => 'E-Mail Address',
@@ -36,6 +38,8 @@ return [
 
     'edit' => [
 
+        'title' => 'Edit User',
+
         'name' => [
             'label' => 'Name',
             'placeholder' => 'Name',
@@ -51,6 +55,8 @@ return [
     ],
 
     'destroy' => [
+
+        'title' => 'Delete User',
 
         'text' => 'Are you sure you want to delete the user :name (:email)?',
 

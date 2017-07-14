@@ -45,7 +45,7 @@ class UserController extends Controller {
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:backend_users',
-        ]);
+        ], trans('backend::validation'), trans('backend::validation.attributes'));
 
         $password = str_random();
 
@@ -85,7 +85,7 @@ class UserController extends Controller {
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255' . ($request->input('email') !== $user->email ? '|unique:users' : ''),
-        ]);
+        ], trans('backend::validation'), trans('backend::validation.attributes'));
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');

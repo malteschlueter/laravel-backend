@@ -1,44 +1,57 @@
 @extends('backend::layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">@lang('backend::user.index.title')</div>
+                <div class="panel-body">
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
-            <a href="{{ route('backend.user.create') }}" class="btn btn-default">@lang('backend::user.index.button.add')</a>
+                    <a href="{{ route('backend.user.create') }}" class="btn btn-default">@lang('backend::user.index.button.add')</a>
 
-            <table class="table table-striped">
-                <thead>
+                    <hr>
 
-                <tr>
-                    <th>@lang('backend::user.index.name')</th>
-                    <th>@lang('backend::user.index.email')</th>
-                    <th></th>
-                </tr>
+                    <table class="table table-striped">
+                        <thead>
 
-                </thead>
-                <tbody>
+                        <tr>
+                            <th>@lang('backend::user.index.name')</th>
+                            <th>@lang('backend::user.index.email')</th>
+                            <th></th>
+                        </tr>
 
-                @foreach($users as $user)
+                        </thead>
+                        <tbody>
 
-                    <tr>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>
-                            <a href="{{ route('backend.user.edit', $user) }}" class="btn btn-primary">@lang('backend::user.index.button.edit')</a>
+                        @foreach($users as $user)
 
-                            @if(Auth::id() !== $user->id)
-                                <a href="{{ route('backend.user.destroyConfirm', $user) }}" class="btn btn-danger">@lang('backend::user.index.button.delete')</a>
-                            @endif
-                        </td>
-                    </tr>
+                            <tr>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>
+                                    <a href="{{ route('backend.user.edit', $user) }}" class="btn btn-primary">@lang('backend::user.index.button.edit')</a>
 
-                @endforeach
+                                    @if(Auth::id() !== $user->id)
+                                        <a href="{{ route('backend.user.destroyConfirm', $user) }}" class="btn btn-danger">@lang('backend::user.index.button.delete')</a>
+                                    @endif
+                                </td>
+                            </tr>
 
-                </tbody>
-            </table>
+                        @endforeach
 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
 @endsection

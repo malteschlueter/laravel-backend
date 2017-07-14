@@ -56,7 +56,7 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:backend_users',
             'password' => 'required|string|min:6|confirmed',
-        ]);
+        ], trans('backend::validation'), trans('backend::validation.attributes'));
     }
 
     /**
