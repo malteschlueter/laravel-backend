@@ -82,9 +82,8 @@
             </div>
         </nav>
 
-        @include('backend::layouts.partials.errors')
-
         @yield('content')
+
     </div>
 
     {{-- Scripts --}}

@@ -14,7 +14,10 @@
                         </div>
                     @endif
 
-                    <a href="{{ route('backend.user.create') }}" class="btn btn-default">@lang('backend::user.index.button.add')</a>
+                    <a href="{{ route('backend.user.create') }}" class="btn btn-default">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        @lang('backend::user.index.button.add')
+                    </a>
 
                     <hr>
 
@@ -36,11 +39,25 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
-                                    <a href="{{ route('backend.user.edit', $user) }}" class="btn btn-primary">@lang('backend::user.index.button.edit')</a>
 
-                                    @if(Auth::id() !== $user->id)
-                                        <a href="{{ route('backend.user.destroyConfirm', $user) }}" class="btn btn-danger">@lang('backend::user.index.button.delete')</a>
-                                    @endif
+                                    <div class="btn-group">
+
+                                        <a href="{{ route('backend.user.edit', $user) }}" class="btn btn-primary">
+                                                <span class="glyphicon glyphicon-edit"></span>
+                                            @lang('backend::user.index.button.edit')
+                                        </a>
+
+                                        @if(Auth::id() !== $user->id)
+
+                                            <a href="{{ route('backend.user.destroyConfirm', $user) }}" class="btn btn-danger">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                                @lang('backend::user.index.button.delete')
+                                            </a>
+
+                                        @endif
+
+                                    </div>
+
                                 </td>
                             </tr>
 

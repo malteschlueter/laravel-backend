@@ -35,10 +35,19 @@ return [
     ],
 
     'passwords' => [
-        'title' => 'Password Reset',
-        'text' => 'Enter your email address that you used to register. We\'ll send you an email with a link to reset your password.',
-        'email' => 'E-Mail Address',
-        'button' => 'Send',
+        'email' => [
+            'title' => 'Reset Password',
+            'text' => 'Enter your email address that you used to register. We\'ll send you an email with a link to reset your password.',
+            'email' => 'E-Mail Address',
+            'button' => 'Send',
+        ],
+        'reset' => [
+            'title' => 'Reset Password',
+            'email' => 'E-Mail Address',
+            'password' => 'Password',
+            'password_confirm' => 'Confirm Password',
+            'button' => 'Reset Password',
+        ],
     ],
 
 ];

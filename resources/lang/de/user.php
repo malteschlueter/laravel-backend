@@ -32,7 +32,7 @@ return [
             'placeholder' => 'E-Mail Adresse',
         ],
 
-        'button' => 'Speichern',
+        'button' => 'Hinzufügen',
 
     ],
 
