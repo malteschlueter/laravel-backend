@@ -10,10 +10,10 @@
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
 
-                    <p>Möchten Sie wirklich den Benutzer {{ $user->name }} ({{ $user->email }}) löschen?</p>
+                    <p>@lang('backend::user.destroy.text', ['name' => $user->name, 'email' => $user->email])</p>
 
-                    <button type="submit" class="btn btn-danger">Ja</button>
-                    <a href="{{ route('backend.user') }}" class="btn btn-default">Nein</a>
+                    <button type="submit" class="btn btn-danger">@lang('backend::user.destroy.button.yes')</button>
+                    <a href="{{ route('backend.user') }}" class="btn btn-default">@lang('backend::user.destroy.button.no')</a>
 
                 </form>
 

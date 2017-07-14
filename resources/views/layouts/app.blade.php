@@ -51,10 +51,10 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('backend.login') }}">Login</a></li>
+                            <li><a href="{{ route('backend.login') }}">@lang('backend::layout.nav.login')</a></li>
 
                             @if(config('backend.allow_registration') === true)
-                                <li><a href="{{ route('backend.register') }}">Register</a></li>
+                                <li><a href="{{ route('backend.register') }}">@lang('backend::layout.nav.register')</a></li>
                             @endif
                         @else
                             <li class="dropdown">
@@ -67,7 +67,7 @@
                                         <a href="{{ route('backend.logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            @lang('backend::layout.nav.logout')
                                         </a>
 
                                         <form id="logout-form" action="{{ route('backend.logout') }}" method="POST" style="display: none;">

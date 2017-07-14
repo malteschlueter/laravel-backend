@@ -1,2 +1,2 @@
 
-<li><a href="{{ route('backend.user') }}">Benutzer</a></li>
+<li><a href="{{ route('backend.user') }}">@lang('backend::layout.nav.users')</a></li>
