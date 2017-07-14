@@ -15,6 +15,8 @@
 
                     <p>@lang('backend::auth.passwords.text')</p>
 
+                    <hr>
+
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('backend.password.email') }}">
                         {{ csrf_field() }}
 

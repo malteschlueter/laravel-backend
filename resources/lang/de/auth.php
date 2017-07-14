@@ -36,7 +36,7 @@ return [
 
     'passwords' => [
         'title' => 'Passwort zurücksetzen',
-        'text' => 'Gib deine E-Mail-Adresse, mit der du dich registriert hast, an. Wir senden dir dann eine E-Mail mit einem Link, mit dem du dein Passwort zurücksetzen kannst.',
+        'text' => 'Gib Deine E-Mail-Adresse, mit der Du Dich registriert hast, an. Wir senden Dir dann eine E-Mail mit einem Link, mit dem Du Dein Passwort zurücksetzen kannst.',
         'email' => 'E-Mail Adresse',
         'button' => 'Senden',
     ],

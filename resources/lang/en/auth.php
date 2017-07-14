@@ -35,10 +35,10 @@ return [
     ],
 
     'passwords' => [
-        'title' => 'Passwort zurücksetzen',
-        'text' => 'Gib deine E-Mail-Adresse, mit der du dich registriert hast, an. Wir senden dir dann eine E-Mail mit einem Link, mit dem du dein Passwort zurücksetzen kannst.',
-        'email' => 'E-Mail Adresse',
-        'button' => 'Senden',
+        'title' => 'Password Reset',
+        'text' => 'Enter your email address that you used to register. We\'ll send you an email with a link to reset your password.',
+        'email' => 'E-Mail Address',
+        'button' => 'Send',
     ],
 
 ];
