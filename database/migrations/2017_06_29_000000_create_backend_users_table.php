@@ -21,6 +21,7 @@ class CreateBackendUsersTable extends Migration
             $table->string('password');
             $table->boolean('active')->default(false);
             $table->rememberToken();
+            $table->timestamp('last_login')->nullable();
             $table->timestamps();
         });
     }

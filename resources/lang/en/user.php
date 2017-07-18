@@ -10,6 +10,8 @@ return [
 
         'email' => 'E-Mail Address',
 
+        'last_login' => 'Last Login',
+
         'button' => [
             'add' => 'Add User',
             'edit' => 'Edit',

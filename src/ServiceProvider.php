@@ -2,8 +2,10 @@
 
 namespace Mschlueter\Backend;
 
+use Illuminate\Support\Facades\Event;
 use Mschlueter\Backend\Console\CreateUserCommand;
 use Mschlueter\Backend\Exceptions\Handler;
+use Mschlueter\Backend\Listeners\UserEventSubscriber;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 
@@ -53,6 +55,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
         $this->loadTranslationsFrom($translations_path, 'backend');
 
         $this->app->singleton(\Illuminate\Contracts\Debug\ExceptionHandler::class, Handler::class);
+
+        Event::subscribe(UserEventSubscriber::class);
     }
 
     protected function setRouting() {

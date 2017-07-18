@@ -27,6 +27,7 @@
                         <tr>
                             <th>@lang('backend::user.index.name')</th>
                             <th>@lang('backend::user.index.email')</th>
+                            <th>@lang('backend::user.index.last_login')</th>
                             <th></th>
                         </tr>
 
@@ -38,6 +39,7 @@
                             <tr>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
+                                <td>{{ $user->last_login or '-' }}</td>
                                 <td>
 
                                     <div class="btn-group">

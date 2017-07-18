@@ -10,6 +10,8 @@ return [
 
         'email' => 'E-Mail Adresse',
 
+        'last_login' => 'Letzte Anmeldung',
+
         'button' => [
             'add' => 'Benutzer hinzufügen',
             'edit' => 'Bearbeiten',
