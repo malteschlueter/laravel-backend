@@ -1,6 +1,8 @@
 {
     "name": "mschlueter/laravel-backend",
-    "type": "library",
+    "description": "Fast backend integration for Laravel",
+    "keywords": ["laravel", "backend"],
+    "license": "MIT",
     "require": {
         "php": ">=7.1",
         "illuminate/support": "5.4.*"
