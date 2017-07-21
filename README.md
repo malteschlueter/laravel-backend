@@ -3,22 +3,7 @@ mschlueter/laravel-backend
 
 ## Installation
 
-Pull this package in through Composer.
-
-```js
-
-    {
-        "repositories": [
-              {
-                "type": "vcs",
-                "url": "git@gitlab.com:mschlueter/laravel-backend.git"
-              }
-        ]
-    }
-
-```
-
-run in terminal:
+Run in terminal:
 `composer require mschlueter/laravel-backend:master-dev`
 
 
