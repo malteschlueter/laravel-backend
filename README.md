@@ -4,7 +4,7 @@ mschlueter/laravel-backend
 ## Installation
 
 Run in terminal:
-`composer require mschlueter/laravel-backend:master-dev`
+`composer require mschlueter/laravel-backend`
 
 
 ### Laravel 5.* Integration
