@@ -49,8 +49,9 @@ class UserCreated extends Notification {
         return (new MailMessage)
             ->subject(sprintf('%s - Registrierung', config('app.name')))
             ->greeting(sprintf('Hallo %s,', $user->name))
-            ->line('es wurde ein Benutzer für Sie eingerichtet und ein Passwort automatisch generiert.')
+            ->line('es wurde ein Benutzer für Sie eingerichtet.')
             ->line('Über den folgenden Button können Sie Ihr Passwort setzen.')
-            ->action('Passwort setzen', route('backend.password.reset', $this->token));
+            ->action('Passwort setzen', route('backend.password.reset', $this->token))
+            ->salutation("Mit freundlichen Grüßen\n\n" . config('app.name'));
     }
 }
