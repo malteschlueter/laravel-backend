@@ -23,7 +23,7 @@
                             <label for="name" class="col-md-4 control-label">@lang('backend::user.edit.name.label')</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="name" id="name" placeholder="@lang('backend::user.edit.name.placeholder')" value="{{ old('name') }}" required>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="@lang('backend::user.edit.name.placeholder')" value="{{ old('name', $user->name) }}" required>
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -37,7 +37,7 @@
                             <label for="email" class="col-md-4 control-label">@lang('backend::user.edit.email.label')</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="email" id="email" placeholder="@lang('backend::user.edit.email.placeholder')" value="{{ old('email') }}" required>
+                                <input type="text" class="form-control" name="email" id="email" placeholder="@lang('backend::user.edit.email.placeholder')" value="{{ old('email', $user->email) }}" required>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
