@@ -3,10 +3,10 @@
 namespace Mschlueter\Backend\Console;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
 use Mschlueter\Backend\Models\User;
 use Mschlueter\Backend\Notifications\UserCreated;
-use Symfony\Component\Console\Input\InputOption;
 
 class CreateUserCommand extends Command {
 
@@ -49,17 +49,17 @@ class CreateUserCommand extends Command {
 
         $this->askName();
 
-        $password = str_random();
-
-        $this->user['password'] = bcrypt($password);
+        $this->user['password'] = bcrypt(str_random());
 
         $this->user['active'] = true;
 
         $user = User::create($this->user);
 
-        $user->notify(new UserCreated($password));
+        $token = Password::broker()->createToken($user);
 
-        $this->info('New user created. The password was send via email.');
+        $user->notify(new UserCreated($token));
+
+        $this->info('New user created. The password link was send via email.');
     }
 
     protected function askEmailAddress() {

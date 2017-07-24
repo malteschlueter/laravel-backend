@@ -4,6 +4,7 @@ namespace Mschlueter\Backend\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 use Mschlueter\Backend\Models\User;
 use Mschlueter\Backend\Notifications\UserCreated;
 
@@ -47,15 +48,15 @@ class UserController extends Controller {
             'email' => 'required|string|email|max:255|unique:backend_users',
         ], trans('backend::validation'), trans('backend::validation.attributes'));
 
-        $password = str_random();
-
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'password' => bcrypt($password),
+            'password' => bcrypt(str_random()),
         ]);
 
-        $user->notify(new UserCreated($password));
+        $token = Password::broker()->createToken($user);
+
+        $user->notify(new UserCreated($token));
 
         return redirect()->route('backend.user');
     }
@@ -63,7 +64,7 @@ class UserController extends Controller {
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  User $user
+     * @param  \Mschlueter\Backend\Models\User $user
      *
      * @return \Illuminate\Http\Response
      */
@@ -76,7 +77,7 @@ class UserController extends Controller {
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  User                     $user
+     * @param  \Mschlueter\Backend\Models\User $user
      *
      * @return \Illuminate\Http\Response
      */
@@ -96,7 +97,7 @@ class UserController extends Controller {
     }
 
     /**
-     * @param  User $user
+     * @param  \Mschlueter\Backend\Models\User $user
      *
      * @return \Illuminate\Http\Response
      */
@@ -112,7 +113,7 @@ class UserController extends Controller {
     /**
      * Remove the specified resource from storage.
      *
-     * @param  User $user
+     * @param  \Mschlueter\Backend\Models\User $user
      *
      * @return \Illuminate\Http\Response
      */

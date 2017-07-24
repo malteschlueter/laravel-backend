@@ -13,17 +13,15 @@ class UserCreated extends Notification {
     /**
      * @var string
      */
-    protected $password;
+    protected $token;
 
     /**
      * Create a new notification instance.
      *
-     * @param string $password
-     *
-     * @return void
+     * @param string $token
      */
-    public function __construct(string $password) {
-        $this->password = $password;
+    public function __construct(string $token) {
+        $this->token = $token;
     }
 
     /**
@@ -40,6 +38,8 @@ class UserCreated extends Notification {
     /**
      * Get the mail representation of the notification.
      *
+     * TODO: Add translation
+     *
      * @param  mixed $user
      *
      * @return \Illuminate\Notifications\Messages\MailMessage
@@ -50,8 +50,7 @@ class UserCreated extends Notification {
             ->subject(sprintf('%s - Registrierung', config('app.name')))
             ->greeting(sprintf('Hallo %s,', $user->name))
             ->line('es wurde ein Benutzer für Sie eingerichtet und ein Passwort automatisch generiert.')
-            ->line($this->password)
-            ->line('Über den folgenden Button kommen Sie zum Login.')
-            ->action('Zum Login', route('backend.login'));
+            ->line('Über den folgenden Button können Sie Ihr Passwort setzen.')
+            ->action('Passwort setzen', route('backend.password.reset', $this->token));
     }
 }
