@@ -17,7 +17,7 @@ return [
         'roles' => [
             \Mschlueter\Backend\Models\Role::SUPER_ADMIN => 'Superadmin',
             \Mschlueter\Backend\Models\Role::ADMIN => 'Admin',
-            \Mschlueter\Backend\Models\Role::EDITOR => 'Editor',
+            \Mschlueter\Backend\Models\Role::USER => 'User',
         ],
 
         'last_login' => 'Letzte Anmeldung',
@@ -51,7 +51,7 @@ return [
         'roles' => [
             \Mschlueter\Backend\Models\Role::SUPER_ADMIN => 'Superadmin',
             \Mschlueter\Backend\Models\Role::ADMIN => 'Admin',
-            \Mschlueter\Backend\Models\Role::EDITOR => 'Editor',
+            \Mschlueter\Backend\Models\Role::USER => 'User',
         ],
 
         'button' => 'Hinzufügen',
@@ -83,7 +83,7 @@ return [
         'roles' => [
             \Mschlueter\Backend\Models\Role::SUPER_ADMIN => 'Superadmin',
             \Mschlueter\Backend\Models\Role::ADMIN => 'Admin',
-            \Mschlueter\Backend\Models\Role::EDITOR => 'Editor',
+            \Mschlueter\Backend\Models\Role::USER => 'User',
         ],
 
         'button' => 'Speichern',

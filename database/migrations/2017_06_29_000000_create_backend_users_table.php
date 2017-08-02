@@ -25,8 +25,8 @@ class CreateBackendUsersTable extends Migration
             $table->enum('role', [
                 Role::SUPER_ADMIN,
                 Role::ADMIN,
-                Role::EDITOR,
-            ])->default(Role::EDITOR);
+                Role::USER,
+            ])->default(Role::USER);
 
             $table->rememberToken();
             $table->timestamp('last_login')->nullable();

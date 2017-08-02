@@ -51,8 +51,8 @@
 
                             <div class="col-md-6">
                                 <select class="form-control" name="role" id="role" required>
-                                    <option value="{{ \Mschlueter\Backend\Models\Role::EDITOR }}">
-                                        @lang('backend::user.create.roles.' . \Mschlueter\Backend\Models\Role::EDITOR)
+                                    <option value="{{ \Mschlueter\Backend\Models\Role::USER }}">
+                                        @lang('backend::user.create.roles.' . \Mschlueter\Backend\Models\Role::USER)
                                     </option>
                                     <option value="{{ \Mschlueter\Backend\Models\Role::ADMIN }}">
                                         @lang('backend::user.create.roles.' . \Mschlueter\Backend\Models\Role::ADMIN)

@@ -5,6 +5,7 @@ namespace Mschlueter\Backend\Console;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
+use Mschlueter\Backend\Models\Role;
 use Mschlueter\Backend\Models\User;
 use Mschlueter\Backend\Notifications\UserCreated;
 
@@ -45,13 +46,13 @@ class CreateUserCommand extends Command {
      */
     public function handle() {
 
-        $this->askEmailAddress();
-
         $this->askName();
 
-        $this->user['password'] = bcrypt(str_random());
+        $this->askEmailAddress();
 
-        $this->user['active'] = true;
+        $this->askRole();
+
+        $this->user['password'] = bcrypt(str_random());
 
         $user = User::create($this->user);
 
@@ -60,30 +61,6 @@ class CreateUserCommand extends Command {
         $user->notify(new UserCreated($token));
 
         $this->info('New user created. The password link was send via email.');
-    }
-
-    protected function askEmailAddress() {
-
-        do {
-
-            $this->user['email'] = $this->ask('Please type in a email address.');
-
-            /* @var \Illuminate\Validation\Validator $validator */
-            $validator = Validator::make($this->user, [
-                'email' => 'required|string|email|max:255|unique:backend_users',
-            ]);
-
-            if($validator->passes() !== true) {
-
-                $errors = $validator->errors()->all();
-
-                foreach($errors as $error) {
-
-                    $this->alert($error);
-                }
-            }
-
-        } while($validator->passes() !== true);
     }
 
     protected function askName() {
@@ -106,7 +83,38 @@ class CreateUserCommand extends Command {
                     $this->alert($error);
                 }
             }
+        } while($validator->passes() !== true);
+    }
 
+    protected function askRole() {
+
+        $this->user['role'] = $this->choice('Please choose a role.', [
+            Role::SUPER_ADMIN => 'Superadmin',
+            Role::ADMIN => 'Admin',
+            Role::USER => 'User',
+        ]);
+    }
+
+    protected function askEmailAddress() {
+
+        do {
+
+            $this->user['email'] = $this->ask('Please type in a email address.');
+
+            /* @var \Illuminate\Validation\Validator $validator */
+            $validator = Validator::make($this->user, [
+                'email' => 'required|string|email|max:255|unique:backend_users',
+            ]);
+
+            if($validator->passes() !== true) {
+
+                $errors = $validator->errors()->all();
+
+                foreach($errors as $error) {
+
+                    $this->alert($error);
+                }
+            }
         } while($validator->passes() !== true);
     }
 }

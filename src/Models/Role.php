@@ -8,5 +8,5 @@ class Role
 
     const ADMIN = 'admin';
 
-    const EDITOR = 'editor';
+    const USER = 'user';
 }
