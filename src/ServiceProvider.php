@@ -166,9 +166,27 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
             return $user->role === Role::SUPER_ADMIN || $user->role === Role::ADMIN;
         });
 
+        Gate::define('users.create.roles.super_admin', function($user) {
+
+            if($user->role === Role::SUPER_ADMIN) {
+                return true;
+            }
+
+            return false;
+        });
+
         Gate::define('users.edit', function($user, $edit_user) {
 
             if($user->role === Role::SUPER_ADMIN || ($user->role === Role::ADMIN && $edit_user->role !== Role::SUPER_ADMIN)) {
+                return true;
+            }
+
+            return false;
+        });
+
+        Gate::define('users.edit.roles.super_admin', function($user) {
+
+            if($user->role === Role::SUPER_ADMIN) {
                 return true;
             }
 

@@ -47,6 +47,47 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('active') ? ' has-error' : '' }}">
+                            <label for="active" class="col-md-4 control-label">@lang('backend::user.edit.active.label')</label>
+
+                            <div class="col-md-6">
+                                <input type="checkbox" name="active" id="active" value="1"{{ $user->active ? ' checked' : '' }}>
+
+                                @if ($errors->has('active'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('active') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
+                            <label for="role" class="col-md-4 control-label">@lang('backend::user.edit.role.label')</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" name="role" id="role" required>
+                                    <option value="{{ \Mschlueter\Backend\Models\Role::EDITOR }}"{{ $user->role === \Mschlueter\Backend\Models\Role::EDITOR ? ' selected' : '' }}>
+                                        @lang('backend::user.edit.roles.' . \Mschlueter\Backend\Models\Role::EDITOR)
+                                    </option>
+                                    <option value="{{ \Mschlueter\Backend\Models\Role::ADMIN }}"{{ $user->role === \Mschlueter\Backend\Models\Role::ADMIN ? ' selected' : '' }}>
+                                        @lang('backend::user.edit.roles.' . \Mschlueter\Backend\Models\Role::ADMIN)
+                                    </option>
+
+                                    @can('users.edit.roles.super_admin')
+                                        <option value="{{ \Mschlueter\Backend\Models\Role::SUPER_ADMIN }}"{{ $user->role === \Mschlueter\Backend\Models\Role::SUPER_ADMIN ? ' selected' : '' }}>
+                                            @lang('backend::user.edit.roles.' . \Mschlueter\Backend\Models\Role::SUPER_ADMIN)
+                                        </option>
+                                    @endcan
+                                </select>
+
+                                @if ($errors->has('role'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('role') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">

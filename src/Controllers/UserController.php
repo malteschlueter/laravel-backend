@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Password;
+use Mschlueter\Backend\Models\Role;
 use Mschlueter\Backend\Models\User;
 use Mschlueter\Backend\Notifications\UserCreated;
 
@@ -58,15 +59,24 @@ class UserController extends Controller {
             return view('backend::not-allowed');
         }
 
-        $this->validate($request, [
+        $validation = [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:backend_users',
-        ], trans('backend::validation'), trans('backend::validation.attributes'));
+        ];
+
+        if($request->input('role') === Role::SUPER_ADMIN && !Gate::allows('users.create.roles.super_admin')) {
+            return view('backend::not-allowed');
+        } else {
+            $validation['role'] = 'required|string';
+        }
+
+        $this->validate($request, $validation, trans('backend::validation'), trans('backend::validation.attributes'));
 
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => bcrypt(str_random()),
+            'role' => $request->input('role'),
         ]);
 
         $token = Password::broker()->createToken($user);
@@ -106,13 +116,24 @@ class UserController extends Controller {
             return view('backend::not-allowed');
         }
 
-        $this->validate($request, [
+        $validation = [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255' . ($request->input('email') !== $user->email ? '|unique:users' : ''),
-        ], trans('backend::validation'), trans('backend::validation.attributes'));
+            'email' => 'required|string|email|max:255' . ($request->input('email') !== $user->email ? '|unique:backend_users' : ''),
+            'active' => 'boolean',
+        ];
+
+        if($request->input('role') === Role::SUPER_ADMIN && !Gate::allows('users.edit.roles.super_admin', $user)) {
+            return view('backend::not-allowed');
+        } else {
+            $validation['role'] = 'required|string';
+        }
+
+        $this->validate($request, $validation, trans('backend::validation'), trans('backend::validation.attributes'));
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
+        $user->active = $request->input('active', 0);
+        $user->role = $request->input('role');
 
         $user->save();
 
