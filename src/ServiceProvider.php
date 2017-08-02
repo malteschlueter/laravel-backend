@@ -3,9 +3,11 @@
 namespace Mschlueter\Backend;
 
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Gate;
 use Mschlueter\Backend\Console\CreateUserCommand;
 use Mschlueter\Backend\Exceptions\Handler;
 use Mschlueter\Backend\Listeners\UserEventSubscriber;
+use Mschlueter\Backend\Models\Role;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 
@@ -57,6 +59,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
         $this->app->singleton(\Illuminate\Contracts\Debug\ExceptionHandler::class, Handler::class);
 
         Event::subscribe(UserEventSubscriber::class);
+
+        $this->definePermissions();
     }
 
     protected function setRouting() {
@@ -149,6 +153,35 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
                 'uses' => 'UserController@destroyAction',
                 'as' => 'backend.user.destroy',
             ]);
+        });
+    }
+
+    protected function definePermissions() {
+
+        Gate::define('users.index', function($user) {
+            return $user->role === Role::SUPER_ADMIN || $user->role === Role::ADMIN;
+        });
+
+        Gate::define('users.create', function($user) {
+            return $user->role === Role::SUPER_ADMIN || $user->role === Role::ADMIN;
+        });
+
+        Gate::define('users.edit', function($user, $edit_user) {
+
+            if($user->role === Role::SUPER_ADMIN || ($user->role === Role::ADMIN && $edit_user->role !== Role::SUPER_ADMIN)) {
+                return true;
+            }
+
+            return false;
+        });
+
+        Gate::define('users.destroy', function($user, $edit_user) {
+
+            if($user->id !== $edit_user->id && ($user->role === Role::SUPER_ADMIN || ($user->role === Role::ADMIN && $edit_user->role !== Role::SUPER_ADMIN))) {
+                return true;
+            }
+
+            return false;
         });
     }
 

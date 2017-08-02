@@ -4,6 +4,7 @@ namespace Mschlueter\Backend\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Password;
 use Mschlueter\Backend\Models\User;
 use Mschlueter\Backend\Notifications\UserCreated;
@@ -20,6 +21,11 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function indexAction() {
+
+        if(!Gate::allows('users.index')) {
+            return view('backend::not-allowed');
+        }
+
         $users = User::all();
 
         return view('backend::user.index', compact('users'));
@@ -31,6 +37,11 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function createAction() {
+
+        if(!Gate::allows('users.create')) {
+            return view('backend::not-allowed');
+        }
+
         return view('backend::user.create');
     }
 
@@ -42,6 +53,10 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function storeAction(Request $request) {
+
+        if(!Gate::allows('users.create')) {
+            return view('backend::not-allowed');
+        }
 
         $this->validate($request, [
             'name' => 'required|string|max:255',
@@ -70,6 +85,10 @@ class UserController extends Controller {
      */
     public function editAction(User $user) {
 
+        if(!Gate::allows('users.edit', $user)) {
+            return view('backend::not-allowed');
+        }
+
         return view('backend::user.edit', compact('user'));
     }
 
@@ -82,6 +101,10 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function updateAction(Request $request, User $user) {
+
+        if(!Gate::allows('users.edit', $user)) {
+            return view('backend::not-allowed');
+        }
 
         $this->validate($request, [
             'name' => 'required|string|max:255',
@@ -103,6 +126,10 @@ class UserController extends Controller {
      */
     public function destroyConfirmAction(User $user) {
 
+        if(!Gate::allows('users.destroy', $user)) {
+            return view('backend::not-allowed');
+        }
+
         if($user->id === Auth::id()) {
             abort(403, 'It is not allowed to delete yourself.');
         }
@@ -118,6 +145,10 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroyAction(User $user) {
+
+        if(!Gate::allows('users.destroy', $user)) {
+            return view('backend::not-allowed');
+        }
 
         if($user->id === Auth::id()) {
             abort(403, 'It is not allowed to delete yourself.');

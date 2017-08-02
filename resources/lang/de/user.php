@@ -10,6 +10,16 @@ return [
 
         'email' => 'E-Mail Adresse',
 
+        'active' => 'Aktiv',
+
+        'role' => 'Rolle',
+
+        'roles' => [
+            \Mschlueter\Backend\Models\Role::SUPER_ADMIN => 'Superadmin',
+            \Mschlueter\Backend\Models\Role::ADMIN => 'Admin',
+            \Mschlueter\Backend\Models\Role::EDITOR => 'Editor',
+        ],
+
         'last_login' => 'Letzte Anmeldung',
 
         'button' => [
