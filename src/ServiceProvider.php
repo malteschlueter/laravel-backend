@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Gate;
 use Mschlueter\Backend\Console\CreateUserCommand;
 use Mschlueter\Backend\Exceptions\Handler;
 use Mschlueter\Backend\Listeners\UserEventSubscriber;
-use Mschlueter\Backend\Models\Role;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 
@@ -24,14 +23,14 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
         $this->mergeConfigFrom($config_file, 'backend');
 
         $this->publishes([
-            $config_file => config_path('backend.php')
+            $config_file => config_path('backend.php'),
         ], 'backend');
 
         $this->getConfig()->set('auth.providers.users.model', \Mschlueter\Backend\Models\User::class);
         $this->getConfig()->set('auth.providers.users.table', \Mschlueter\Backend\Models\User::class);
         $this->getConfig()->set('auth.passwords.users.table', 'backend_password_resets');
 
-        if ($this->app->runningInConsole()) {
+        if($this->app->runningInConsole()) {
             $this->commands([
                 CreateUserCommand::class,
             ]);
@@ -158,49 +157,15 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
 
     protected function definePermissions() {
 
-        Gate::define('users.index', function($user) {
-            return $user->role === Role::SUPER_ADMIN || $user->role === Role::ADMIN;
-        });
+        Gate::define('users.index', 'Mschlueter\Backend\Policies\UserPolicy@index');
 
-        Gate::define('users.create', function($user) {
-            return $user->role === Role::SUPER_ADMIN || $user->role === Role::ADMIN;
-        });
+        Gate::define('users.create', 'Mschlueter\Backend\Policies\UserPolicy@create');
+        Gate::define('users.create.roles.super_admin', 'Mschlueter\Backend\Policies\UserPolicy@createRolesSuperAdmin');
 
-        Gate::define('users.create.roles.super_admin', function($user) {
+        Gate::define('users.edit', 'Mschlueter\Backend\Policies\UserPolicy@edit');
+        Gate::define('users.edit.roles.super_admin', 'Mschlueter\Backend\Policies\UserPolicy@editRolesSuperAdmin');
 
-            if($user->role === Role::SUPER_ADMIN) {
-                return true;
-            }
-
-            return false;
-        });
-
-        Gate::define('users.edit', function($user, $edit_user) {
-
-            if($user->role === Role::SUPER_ADMIN || ($user->role === Role::ADMIN && $edit_user->role !== Role::SUPER_ADMIN)) {
-                return true;
-            }
-
-            return false;
-        });
-
-        Gate::define('users.edit.roles.super_admin', function($user) {
-
-            if($user->role === Role::SUPER_ADMIN) {
-                return true;
-            }
-
-            return false;
-        });
-
-        Gate::define('users.destroy', function($user, $edit_user) {
-
-            if($user->id !== $edit_user->id && ($user->role === Role::SUPER_ADMIN || ($user->role === Role::ADMIN && $edit_user->role !== Role::SUPER_ADMIN))) {
-                return true;
-            }
-
-            return false;
-        });
+        Gate::define('users.destroy', 'Mschlueter\Backend\Policies\UserPolicy@destroy');
     }
 
     /**
@@ -208,8 +173,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
      *
      * @return \Illuminate\Config\Repository
      */
-    protected function getConfig()
-    {
+    protected function getConfig() {
         return $this->app['config'];
     }
 
@@ -218,8 +182,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
      *
      * @return \Illuminate\Routing\Router
      */
-    protected function getRouter()
-    {
+    protected function getRouter() {
         return $this->app['router'];
     }
 }

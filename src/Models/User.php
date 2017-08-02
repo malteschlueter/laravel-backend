@@ -39,6 +39,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
+    protected $casts = [
+        'active' => 'boolean',
+    ];
+
     /**
      * Send the password reset notification.
      *
