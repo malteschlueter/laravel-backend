@@ -10,6 +10,16 @@ return [
 
         'email' => 'E-Mail Adresse',
 
+        'active' => 'Aktiv',
+
+        'role' => 'Rolle',
+
+        'roles' => [
+            \Mschlueter\Backend\Models\Role::SUPER_ADMIN => 'Superadmin',
+            \Mschlueter\Backend\Models\Role::ADMIN => 'Admin',
+            \Mschlueter\Backend\Models\Role::USER => 'User',
+        ],
+
         'last_login' => 'Letzte Anmeldung',
 
         'button' => [
@@ -34,6 +44,16 @@ return [
             'placeholder' => 'E-Mail Adresse',
         ],
 
+        'role' => [
+            'label' => 'Rolle',
+        ],
+
+        'roles' => [
+            \Mschlueter\Backend\Models\Role::SUPER_ADMIN => 'Superadmin',
+            \Mschlueter\Backend\Models\Role::ADMIN => 'Admin',
+            \Mschlueter\Backend\Models\Role::USER => 'User',
+        ],
+
         'button' => 'Hinzufügen',
 
     ],
@@ -50,6 +70,20 @@ return [
         'email' => [
             'label' => 'E-Mail Adresse',
             'placeholder' => 'E-Mail Adresse',
+        ],
+
+        'active' => [
+            'label' => 'Aktiv',
+        ],
+
+        'role' => [
+            'label' => 'Rolle',
+        ],
+
+        'roles' => [
+            \Mschlueter\Backend\Models\Role::SUPER_ADMIN => 'Superadmin',
+            \Mschlueter\Backend\Models\Role::ADMIN => 'Admin',
+            \Mschlueter\Backend\Models\Role::USER => 'User',
         ],
 
         'button' => 'Speichern',

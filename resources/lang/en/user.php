@@ -10,6 +10,16 @@ return [
 
         'email' => 'E-Mail Address',
 
+        'active' => 'Active',
+
+        'role' => 'Role',
+
+        'roles' => [
+            \Mschlueter\Backend\Models\Role::SUPER_ADMIN => 'Superadmin',
+            \Mschlueter\Backend\Models\Role::ADMIN => 'Admin',
+            \Mschlueter\Backend\Models\Role::USER => 'User',
+        ],
+
         'last_login' => 'Last Login',
 
         'button' => [
@@ -34,6 +44,16 @@ return [
             'placeholder' => 'E-Mail Address',
         ],
 
+        'role' => [
+            'label' => 'Role',
+        ],
+
+        'roles' => [
+            \Mschlueter\Backend\Models\Role::SUPER_ADMIN => 'Superadmin',
+            \Mschlueter\Backend\Models\Role::ADMIN => 'Admin',
+            \Mschlueter\Backend\Models\Role::USER => 'User',
+        ],
+
         'button' => 'Add',
 
     ],
@@ -50,6 +70,20 @@ return [
         'email' => [
             'label' => 'E-Mail Address',
             'placeholder' => 'E-Mail Address',
+        ],
+
+        'active' => [
+            'label' => 'Active',
+        ],
+
+        'role' => [
+            'label' => 'Role',
+        ],
+
+        'roles' => [
+            \Mschlueter\Backend\Models\Role::SUPER_ADMIN => 'Superadmin',
+            \Mschlueter\Backend\Models\Role::ADMIN => 'Admin',
+            \Mschlueter\Backend\Models\Role::USER => 'User',
         ],
 
         'button' => 'Save',

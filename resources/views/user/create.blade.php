@@ -46,6 +46,33 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
+                            <label for="role" class="col-md-4 control-label">@lang('backend::user.create.role.label')</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" name="role" id="role" required>
+                                    <option value="{{ \Mschlueter\Backend\Models\Role::USER }}">
+                                        @lang('backend::user.create.roles.' . \Mschlueter\Backend\Models\Role::USER)
+                                    </option>
+                                    <option value="{{ \Mschlueter\Backend\Models\Role::ADMIN }}">
+                                        @lang('backend::user.create.roles.' . \Mschlueter\Backend\Models\Role::ADMIN)
+                                    </option>
+
+                                    @can('users.create.roles.super_admin')
+                                        <option value="{{ \Mschlueter\Backend\Models\Role::SUPER_ADMIN }}">
+                                            @lang('backend::user.create.roles.' . \Mschlueter\Backend\Models\Role::SUPER_ADMIN)
+                                        </option>
+                                    @endcan
+                                </select>
+
+                                @if ($errors->has('role'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('role') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">

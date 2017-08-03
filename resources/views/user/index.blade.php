@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">@lang('backend::user.index.title')</div>
                 <div class="panel-body">
@@ -27,6 +27,8 @@
                         <tr>
                             <th>@lang('backend::user.index.name')</th>
                             <th>@lang('backend::user.index.email')</th>
+                            <th>@lang('backend::user.index.active')</th>
+                            <th>@lang('backend::user.index.role')</th>
                             <th>@lang('backend::user.index.last_login')</th>
                             <th></th>
                         </tr>
@@ -39,24 +41,32 @@
                             <tr>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
+                                <td>
+                                    @if($user->active)
+                                        <span class="glyphicon glyphicon-check"></span>
+                                    @else
+                                        <span class="glyphicon glyphicon-unchecked"></span>
+                                    @endif
+                                </td>
+                                <td>@lang('backend::user.index.roles.' . $user->role)</td>
                                 <td>{{ $user->last_login or '-' }}</td>
                                 <td>
 
                                     <div class="btn-group">
 
-                                        <a href="{{ route('backend.user.edit', $user) }}" class="btn btn-primary">
+                                        @can('users.edit', $user)
+                                            <a href="{{ route('backend.user.edit', $user) }}" class="btn btn-primary">
                                                 <span class="glyphicon glyphicon-edit"></span>
-                                            @lang('backend::user.index.button.edit')
-                                        </a>
+                                                @lang('backend::user.index.button.edit')
+                                            </a>
+                                        @endcan
 
-                                        @if(Auth::id() !== $user->id)
-
+                                        @can('users.destroy', $user)
                                             <a href="{{ route('backend.user.destroyConfirm', $user) }}" class="btn btn-danger">
                                                 <span class="glyphicon glyphicon-trash"></span>
                                                 @lang('backend::user.index.button.delete')
                                             </a>
-
-                                        @endif
+                                        @endcan
 
                                     </div>
 
