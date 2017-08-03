@@ -74,4 +74,19 @@ class LoginController extends Controller
             ->withInput($request->only($this->username(), 'remember'))
             ->withErrors($errors);
     }
+
+    /**
+     * Get the needed authorization credentials from the request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    protected function credentials(Request $request)
+    {
+        $credentials = $request->only($this->username(), 'password');
+
+        $credentials['active'] = true;
+
+        return $credentials;
+    }
 }
