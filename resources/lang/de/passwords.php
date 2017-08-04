@@ -13,10 +13,10 @@ return [
     |
     */
 
-    'password' => 'Passwords must be at least six characters and match the confirmation.',
+    'password' => 'Das Passwort muss mindestens 6 Zeichen lang sein und muss mit der Bestätigung übereinstimmen.',
     'reset' => 'Ihr Passwort wurde zurückgesetzt!',
     'sent' => 'Der Link zum Passwort zurücksetzen wurde Ihnen per Mail zugesendet.',
-    'token' => 'This password reset token is invalid.',
+    'token' => 'Der Link zum Passwort zurücksetzen ist ungültig.',
     'user' => 'Es wurde keine passende E-Mail Adresse gefunden.',
 
 ];
