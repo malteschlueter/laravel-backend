@@ -48,7 +48,7 @@
                                         <span class="glyphicon glyphicon-unchecked"></span>
                                     @endif
                                 </td>
-                                <td>@lang('backend::user.index.roles.' . $user->role)</td>
+                                <td>@lang('backend::user.index.roles.' . $user->role->key)</td>
                                 <td>{{ $user->last_login or '-' }}</td>
                                 <td>
 

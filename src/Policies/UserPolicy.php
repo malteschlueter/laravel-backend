@@ -26,7 +26,7 @@ class UserPolicy {
      */
     public function index(User $user) {
 
-        return $user->role === Role::SUPER_ADMIN || $user->role === Role::ADMIN;;
+        return $user->role->key === Role::SUPER_ADMIN || $user->role->key === Role::ADMIN;
     }
 
     /**
@@ -36,7 +36,7 @@ class UserPolicy {
      */
     public function create(User $user) {
 
-        return $user->role === Role::SUPER_ADMIN || $user->role === Role::ADMIN;
+        return $user->role->key === Role::SUPER_ADMIN || $user->role->key === Role::ADMIN;
     }
 
     /**
@@ -46,7 +46,7 @@ class UserPolicy {
      */
     public function createRolesSuperAdmin(User $user) {
 
-        if($user->role === Role::SUPER_ADMIN) {
+        if($user->role->key === Role::SUPER_ADMIN) {
             return true;
         }
 
@@ -61,7 +61,7 @@ class UserPolicy {
      */
     public function edit(User $user, User $edit_user) {
 
-        if($user->role === Role::SUPER_ADMIN || ($user->role === Role::ADMIN && $edit_user->role !== Role::SUPER_ADMIN)) {
+        if($user->role->key === Role::SUPER_ADMIN || ($user->role->key === Role::ADMIN && $edit_user->role->key !== Role::SUPER_ADMIN)) {
             return true;
         }
 
@@ -75,7 +75,7 @@ class UserPolicy {
      */
     public function editRolesSuperAdmin(User $user) {
 
-        if($user->role === Role::SUPER_ADMIN) {
+        if($user->role->key === Role::SUPER_ADMIN) {
             return true;
         }
 
@@ -90,7 +90,7 @@ class UserPolicy {
      */
     public function destroy(User $user, User $edit_user) {
 
-        if($user->id !== $edit_user->id && ($user->role === Role::SUPER_ADMIN || ($user->role === Role::ADMIN && $edit_user->role !== Role::SUPER_ADMIN))) {
+        if($user->id !== $edit_user->id && ($user->role->key === Role::SUPER_ADMIN || ($user->role->key === Role::ADMIN && $edit_user->role->key !== Role::SUPER_ADMIN))) {
             return true;
         }
 

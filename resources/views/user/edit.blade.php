@@ -61,28 +61,28 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
-                            <label for="role" class="col-md-4 control-label">@lang('backend::user.edit.role.label')</label>
+                        <div class="form-group{{ $errors->has('role_id') ? ' has-error' : '' }}">
+                            <label for="role_id" class="col-md-4 control-label">@lang('backend::user.edit.role.label')</label>
 
                             <div class="col-md-6">
-                                <select class="form-control" name="role" id="role" required>
-                                    <option value="{{ \Mschlueter\Backend\Models\Role::USER }}"{{ $user->role === \Mschlueter\Backend\Models\Role::USER ? ' selected' : '' }}>
-                                        @lang('backend::user.edit.roles.' . \Mschlueter\Backend\Models\Role::USER)
-                                    </option>
-                                    <option value="{{ \Mschlueter\Backend\Models\Role::ADMIN }}"{{ $user->role === \Mschlueter\Backend\Models\Role::ADMIN ? ' selected' : '' }}>
-                                        @lang('backend::user.edit.roles.' . \Mschlueter\Backend\Models\Role::ADMIN)
-                                    </option>
+                                <select class="form-control" name="role_id" id="role_id" required>
+                                    @foreach($roles as $role)
 
-                                    @can('users.edit.roles.super_admin')
-                                        <option value="{{ \Mschlueter\Backend\Models\Role::SUPER_ADMIN }}"{{ $user->role === \Mschlueter\Backend\Models\Role::SUPER_ADMIN ? ' selected' : '' }}>
-                                            @lang('backend::user.edit.roles.' . \Mschlueter\Backend\Models\Role::SUPER_ADMIN)
+                                        @if($role->key === \Mschlueter\Backend\Models\Role::SUPER_ADMIN)
+                                            @cannot('users.edit.roles.super_admin')
+                                                @continue
+                                            @endcannot
+                                        @endif
+
+                                        <option value="{{ $role->id }}"{{ $role->id === $user->role_id ? ' selected' : '' }}>
+                                            @lang('backend::user.edit.roles.' . $role->key)
                                         </option>
-                                    @endcan
+                                    @endforeach
                                 </select>
 
-                                @if ($errors->has('role'))
+                                @if ($errors->has('role_id'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('role') }}</strong>
+                                        <strong>{{ $errors->first('role_id') }}</strong>
                                     </span>
                                 @endif
                             </div>

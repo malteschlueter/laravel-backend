@@ -6,8 +6,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Mschlueter\Backend\Notifications\Auth\ResetPassword as ResetPasswordNotification;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
+
     use Notifiable;
 
     /**
@@ -27,7 +27,7 @@ class User extends Authenticatable
         'email',
         'password',
         'active',
-        'role',
+        'role_id',
     ];
 
     /**
@@ -39,19 +39,31 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
+    /**
+     * The attributes that should be cast to native types.
+     * 
+     * @var array
+     */
     protected $casts = [
         'active' => 'boolean',
+        'role_id' => 'integer',
     ];
 
     /**
      * Send the password reset notification.
      *
-     * @param  string  $token
+     * @param  string $token
+     *
      * @return void
      */
-    public function sendPasswordResetNotification($token)
-    {
+    public function sendPasswordResetNotification($token) {
         $this->notify(new ResetPasswordNotification($token));
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function role() {
+        return $this->belongsTo(Role::class);
     }
 }

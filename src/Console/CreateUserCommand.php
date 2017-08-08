@@ -86,15 +86,6 @@ class CreateUserCommand extends Command {
         } while($validator->passes() !== true);
     }
 
-    protected function askRole() {
-
-        $this->user['role'] = $this->choice('Please choose a role.', [
-            Role::SUPER_ADMIN => 'Superadmin',
-            Role::ADMIN => 'Admin',
-            Role::USER => 'User',
-        ]);
-    }
-
     protected function askEmailAddress() {
 
         do {
@@ -116,5 +107,12 @@ class CreateUserCommand extends Command {
                 }
             }
         } while($validator->passes() !== true);
+    }
+
+    protected function askRole() {
+
+        $roles = Role::all()->pluck('key', 'id');
+
+        $this->user['role_id'] = $this->choice('Please choose a role.', $roles->toArray());
     }
 }

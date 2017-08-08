@@ -27,7 +27,7 @@ class UserController extends Controller {
             return view('backend::not-allowed');
         }
 
-        $users = User::all();
+        $users = User::with('role')->get();
 
         return view('backend::user.index', compact('users'));
     }
@@ -43,7 +43,9 @@ class UserController extends Controller {
             return view('backend::not-allowed');
         }
 
-        return view('backend::user.create');
+        $roles = Role::all();
+
+        return view('backend::user.create', compact('roles'));
     }
 
     /**
@@ -64,10 +66,10 @@ class UserController extends Controller {
             'email' => 'required|string|email|max:255|unique:backend_users',
         ];
 
-        if($request->input('role') === Role::SUPER_ADMIN && !Gate::allows('users.create.roles.super_admin')) {
+        if($request->input('role_id') === Role::getSuperAdmin()->id && !Gate::allows('users.create.roles.super_admin')) {
             return view('backend::not-allowed');
         } else {
-            $validation['role'] = 'required|string';
+            $validation['role_id'] = 'required|string';
         }
 
         $this->validate($request, $validation, trans('backend::validation'), trans('backend::validation.attributes'));
@@ -76,7 +78,7 @@ class UserController extends Controller {
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => bcrypt(str_random()),
-            'role' => $request->input('role'),
+            'role_id' => $request->input('role_id'),
         ]);
 
         $token = Password::broker()->createToken($user);
@@ -99,7 +101,9 @@ class UserController extends Controller {
             return view('backend::not-allowed');
         }
 
-        return view('backend::user.edit', compact('user'));
+        $roles = Role::all();
+
+        return view('backend::user.edit', compact('user', 'roles'));
     }
 
     /**
@@ -122,10 +126,10 @@ class UserController extends Controller {
             'active' => 'boolean',
         ];
 
-        if($request->input('role') === Role::SUPER_ADMIN && !Gate::allows('users.edit.roles.super_admin', $user)) {
+        if($request->input('role_id') === Role::getSuperAdmin()->id && !Gate::allows('users.edit.roles.super_admin')) {
             return view('backend::not-allowed');
         } else {
-            $validation['role'] = 'required|string';
+            $validation['role_id'] = 'required|integer';
         }
 
         $this->validate($request, $validation, trans('backend::validation'), trans('backend::validation.attributes'));
@@ -133,7 +137,7 @@ class UserController extends Controller {
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->active = $request->input('active', 0);
-        $user->role = $request->input('role');
+        $user->role_id = $request->input('role_id');
 
         $user->save();
 

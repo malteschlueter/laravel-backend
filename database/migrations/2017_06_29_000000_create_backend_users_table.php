@@ -22,11 +22,7 @@ class CreateBackendUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean('active')->default(true);
-            $table->enum('role', [
-                Role::SUPER_ADMIN,
-                Role::ADMIN,
-                Role::USER,
-            ])->default(Role::USER);
+            $table->integer('role_id')->unsigned()->nullable();
 
             $table->rememberToken();
             $table->timestamp('last_login')->nullable();
