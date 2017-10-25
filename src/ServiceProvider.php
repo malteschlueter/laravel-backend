@@ -26,8 +26,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
             $config_file => config_path('backend.php'),
         ], 'backend');
 
-        $this->getConfig()->set('auth.providers.users.model', \Mschlueter\Backend\Models\User::class);
-        $this->getConfig()->set('auth.providers.users.table', \Mschlueter\Backend\Models\User::class);
+        $this->getConfig()->set('auth.providers.users.model', config('backend.auth.providers.users.model'));
+        $this->getConfig()->set('auth.providers.users.table', config('backend.auth.providers.users.table'));
         $this->getConfig()->set('auth.passwords.users.table', 'backend_password_resets');
 
         if($this->app->runningInConsole()) {
