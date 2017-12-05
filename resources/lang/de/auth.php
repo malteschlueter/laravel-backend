@@ -48,6 +48,13 @@ return [
             'password_confirm' => 'Passwort bestätigen',
             'button' => 'Passwort zurücksetzen',
         ],
+        'change' => [
+            'title' => 'Passwort ändern',
+            'old-password' => 'Altes Passwort',
+            'new-password' => 'Neues Passwort',
+            'new-password_confirm' => 'Passwort bestätigen',
+            'button' => 'Passwort ändern',
+        ],
     ],
 
 ];

@@ -33,6 +33,8 @@ return [
         'name' => 'Name',
         'email' => 'E-Mail Adresse',
         'password' => 'Passwort',
+        'old-password' => 'Passwort',
+        'new-password' => 'Passwort',
     ],
 
 ];

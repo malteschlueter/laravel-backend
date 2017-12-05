@@ -86,6 +86,8 @@ return [
             \Mschlueter\Backend\Models\Role::USER => 'User',
         ],
 
+        'change-password' => 'Passwort ändern',
+
         'button' => 'Speichern',
 
     ],

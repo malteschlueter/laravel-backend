@@ -63,6 +63,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ route('backend.user.edit', Auth::user()) }}">@lang('backend::layout.nav.profile')</a></li>
                                     <li>
                                         <a href="{{ route('backend.logout') }}"
                                             onclick="event.preventDefault();

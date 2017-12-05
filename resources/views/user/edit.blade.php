@@ -89,6 +89,14 @@
                         </div>
 
                         <div class="form-group">
+                            <div class="col-md-offset-4 col-md-6">
+                                <a class="btn btn-default" href="{{ route('backend.password.change') }}">
+                                    @lang('backend::user.edit.change-password')
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     <span class="glyphicon glyphicon-floppy-disk"></span>

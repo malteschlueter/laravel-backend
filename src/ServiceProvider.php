@@ -114,6 +114,16 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
                 'as' => 'backend.password.reset',
             ]);
 
+            $router->get('password/change', [
+                'uses' => 'Auth\ChangePasswordController@editAction',
+                'as' => 'backend.password.change',
+            ]);
+
+            $router->post('password/change', [
+                'uses' => 'Auth\ChangePasswordController@updateAction',
+                'as' => 'backend.password.change.request',
+            ]);
+
             $router->get('register', [
                 'uses' => 'Auth\RegisterController@showRegistrationForm',
                 'as' => 'backend.register',
