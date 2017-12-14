@@ -15,8 +15,11 @@ class ResetPassword extends \Illuminate\Auth\Notifications\ResetPassword
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line('You are receiving this email because we received a password reset request for your account.')
-            ->action('Reset Password', url(config('app.url').route('backend.password.reset', $this->token, false)))
-            ->line('If you did not request a password reset, no further action is required.');
+            ->subject(trans('backend::mails.reset-password.subject'))
+            ->greeting(trans('backend::mails.reset-password.greeting'))
+            ->line(trans('backend::mails.reset-password.first-line'))
+            ->action(trans('backend::mails.reset-password.action'), url(config('app.url').route('backend.password.reset', $this->token, false)))
+            ->line(trans('backend::mails.reset-password.last-line'))
+            ->salutation(trans('backend::mails.reset-password.salutation') . "\n\r" . config('app.name'));
     }
 }

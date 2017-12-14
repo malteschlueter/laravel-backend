@@ -4,7 +4,9 @@ namespace Mschlueter\Backend\Controllers\Auth;
 
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Markdown;
 use Mschlueter\Backend\Controllers\Controller;
+use Mschlueter\Backend\Notifications\Auth\ResetPassword;
 
 class ForgotPasswordController extends Controller
 {
@@ -39,6 +41,17 @@ class ForgotPasswordController extends Controller
     public function showLinkRequestForm()
     {
         return view('backend::auth.passwords.email');
+    }
+
+    /**
+     * Get the response for a successful password reset link.
+     *
+     * @param  string  $response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     */
+    protected function sendResetLinkResponse($response)
+    {
+        return back()->with('status', trans('backend::' . $response));
     }
 
     /**
