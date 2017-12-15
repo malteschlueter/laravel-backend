@@ -54,6 +54,9 @@ return [
             'new-password' => 'New Password',
             'new-password_confirm' => 'Confirm Password',
             'button' => 'Change Password',
+            'messages' => [
+                'success' => 'Your password has been changed.',
+            ],
         ],
     ],
 

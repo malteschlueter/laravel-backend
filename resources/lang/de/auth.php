@@ -54,6 +54,9 @@ return [
             'new-password' => 'Neues Passwort',
             'new-password_confirm' => 'Passwort bestätigen',
             'button' => 'Passwort ändern',
+            'messages' => [
+                'success' => 'Ihr Passwort wurde geändert.',
+            ],
         ],
     ],
 

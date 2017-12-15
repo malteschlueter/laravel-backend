@@ -83,6 +83,8 @@
             </div>
         </nav>
 
+        @include('backend::layouts.partials.flash-message')
+
         @yield('content')
 
     </div>

@@ -4,6 +4,7 @@ namespace Mschlueter\Backend\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Mschlueter\Backend\Controllers\Controller;
 
 class ChangePasswordController extends Controller
@@ -36,16 +37,16 @@ class ChangePasswordController extends Controller
         $user = Auth::user();
 
         $validation = [
-            'old-password' => 'required',
+            'old-password' => 'required|old_password',
             'new-password' => 'required|confirmed|min:6',
         ];
 
         $this->validate($request, $validation, trans('backend::validation'), trans('backend::validation.attributes'));
 
-        $user->password = bcrypt($request->input('new-password'));
+        $user->password = Hash::make($request->input('new-password'));
 
         $user->save();
 
-        return redirect()->route('backend.user');
+        return redirect()->route('backend.user')->with('message', trans('backend::auth.passwords.change.messages.success'));
     }
 }

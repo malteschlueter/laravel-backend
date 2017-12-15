@@ -4,6 +4,7 @@ namespace Mschlueter\Backend;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Validator;
 use Mschlueter\Backend\Console\CreateUserCommand;
 use Mschlueter\Backend\Exceptions\Handler;
 use Mschlueter\Backend\Listeners\UserEventSubscriber;
@@ -60,6 +61,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
         Event::subscribe(UserEventSubscriber::class);
 
         $this->definePermissions();
+
+        Validator::extend('old_password', \Mschlueter\Backend\Rules\OldPassword::class, trans('backend::validation.old-password'));
     }
 
     protected function setRouting() {

@@ -29,6 +29,8 @@ return [
 
     'unique' => 'Die :attribute wird schon verwendet.',
 
+    'old-password' => 'Das alte Passwort wurde nicht korrekt eingegeben.',
+
     'attributes' => [
         'name' => 'Name',
         'email' => 'E-Mail Adresse',
