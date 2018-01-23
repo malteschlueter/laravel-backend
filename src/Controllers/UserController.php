@@ -124,7 +124,7 @@ class UserController extends Controller {
 
         if($request->input('role') === Role::SUPER_ADMIN && !Gate::allows('users.edit.roles.super_admin', $user)) {
             return view('backend::not-allowed');
-        } else {
+        } elseif(Gate::allows('users.edit.roles', $user)) {
             $validation['role'] = 'required|string';
         }
 
@@ -132,12 +132,29 @@ class UserController extends Controller {
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->active = $request->input('active', 0);
-        $user->role = $request->input('role');
+
+        if(Gate::allows('users.edit.active', $user)) {
+            $user->active = $request->input('active', false);
+        }
+
+        if(Gate::allows('users.edit.roles', $user)) {
+            $user->role = $request->input('role');
+        }
 
         $user->save();
 
-        return redirect()->route('backend.user');
+        $data = [
+            'message' => trans('backend::user.edit.message.save', ['name' => $user->name]),
+            'type' => 'success',
+        ];
+
+        if(Gate::allows('users.index')) {
+            $redirect = redirect()->route('backend.user')->with($data);
+        } else {
+            $redirect = redirect()->route('backend.user.edit', $user)->with($data);
+        }
+
+        return $redirect;
     }
 
     /**

@@ -65,6 +65,40 @@ class UserPolicy {
             return true;
         }
 
+        if($user->id === $edit_user->id) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param \Mschlueter\Backend\Models\User $user
+     * @param \Mschlueter\Backend\Models\User $edit_user
+     *
+     * @return bool
+     */
+    public function editActive(User $user, User $edit_user) {
+
+        if($user->role === Role::SUPER_ADMIN || ($user->role === Role::ADMIN && $edit_user->role !== Role::SUPER_ADMIN)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param \Mschlueter\Backend\Models\User $user
+     * @param \Mschlueter\Backend\Models\User $edit_user
+     *
+     * @return bool
+     */
+    public function editRoles(User $user, User $edit_user) {
+
+        if($user->role === Role::SUPER_ADMIN || ($user->role === Role::ADMIN && $edit_user->role !== Role::SUPER_ADMIN)) {
+            return true;
+        }
+
         return false;
     }
 

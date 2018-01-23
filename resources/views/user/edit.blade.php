@@ -47,46 +47,50 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('active') ? ' has-error' : '' }}">
-                            <label for="active" class="col-md-4 control-label">@lang('backend::user.edit.active.label')</label>
+                        @can('users.edit.active', $user)
+                            <div class="form-group{{ $errors->has('active') ? ' has-error' : '' }}">
+                                <label for="active" class="col-md-4 control-label">@lang('backend::user.edit.active.label')</label>
 
-                            <div class="col-md-6">
-                                <input type="checkbox" name="active" id="active" value="1"{{ $user->active ? ' checked' : '' }}>
+                                <div class="col-md-6">
+                                    <input type="checkbox" name="active" id="active" value="1"{{ $user->active ? ' checked' : '' }}>
 
-                                @if ($errors->has('active'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('active') }}</strong>
-                                    </span>
-                                @endif
+                                    @if ($errors->has('active'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('active') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
+                        @endcan
 
-                        <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
-                            <label for="role" class="col-md-4 control-label">@lang('backend::user.edit.role.label')</label>
+                        @can('users.edit.roles', $user)
+                            <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
+                                <label for="role" class="col-md-4 control-label">@lang('backend::user.edit.role.label')</label>
 
-                            <div class="col-md-6">
-                                <select class="form-control" name="role" id="role" required>
-                                    <option value="{{ \Mschlueter\Backend\Models\Role::USER }}"{{ $user->role === \Mschlueter\Backend\Models\Role::USER ? ' selected' : '' }}>
-                                        @lang('backend::user.edit.roles.' . \Mschlueter\Backend\Models\Role::USER)
-                                    </option>
-                                    <option value="{{ \Mschlueter\Backend\Models\Role::ADMIN }}"{{ $user->role === \Mschlueter\Backend\Models\Role::ADMIN ? ' selected' : '' }}>
-                                        @lang('backend::user.edit.roles.' . \Mschlueter\Backend\Models\Role::ADMIN)
-                                    </option>
-
-                                    @can('users.edit.roles.super_admin')
-                                        <option value="{{ \Mschlueter\Backend\Models\Role::SUPER_ADMIN }}"{{ $user->role === \Mschlueter\Backend\Models\Role::SUPER_ADMIN ? ' selected' : '' }}>
-                                            @lang('backend::user.edit.roles.' . \Mschlueter\Backend\Models\Role::SUPER_ADMIN)
+                                <div class="col-md-6">
+                                    <select class="form-control" name="role" id="role" required>
+                                        <option value="{{ \Mschlueter\Backend\Models\Role::USER }}"{{ $user->role === \Mschlueter\Backend\Models\Role::USER ? ' selected' : '' }}>
+                                            @lang('backend::user.edit.roles.' . \Mschlueter\Backend\Models\Role::USER)
                                         </option>
-                                    @endcan
-                                </select>
+                                        <option value="{{ \Mschlueter\Backend\Models\Role::ADMIN }}"{{ $user->role === \Mschlueter\Backend\Models\Role::ADMIN ? ' selected' : '' }}>
+                                            @lang('backend::user.edit.roles.' . \Mschlueter\Backend\Models\Role::ADMIN)
+                                        </option>
 
-                                @if ($errors->has('role'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('role') }}</strong>
-                                    </span>
-                                @endif
+                                        @can('users.edit.roles.super_admin')
+                                            <option value="{{ \Mschlueter\Backend\Models\Role::SUPER_ADMIN }}"{{ $user->role === \Mschlueter\Backend\Models\Role::SUPER_ADMIN ? ' selected' : '' }}>
+                                                @lang('backend::user.edit.roles.' . \Mschlueter\Backend\Models\Role::SUPER_ADMIN)
+                                            </option>
+                                        @endcan
+                                    </select>
+
+                                    @if ($errors->has('role'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('role') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
+                        @endcan
 
                         <div class="form-group">
                             <div class="col-md-offset-4 col-md-6">

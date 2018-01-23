@@ -86,6 +86,10 @@ return [
             \Mschlueter\Backend\Models\Role::USER => 'User',
         ],
 
+        'message' => [
+            'save' => 'The user :name has been saved.',
+        ],
+
         'change-password' => 'Change Password',
 
         'button' => 'Save',

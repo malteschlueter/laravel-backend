@@ -176,6 +176,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider {
         Gate::define('users.create.roles.super_admin', 'Mschlueter\Backend\Policies\UserPolicy@createRolesSuperAdmin');
 
         Gate::define('users.edit', 'Mschlueter\Backend\Policies\UserPolicy@edit');
+        Gate::define('users.edit.active', 'Mschlueter\Backend\Policies\UserPolicy@editActive');
+        Gate::define('users.edit.roles', 'Mschlueter\Backend\Policies\UserPolicy@editRoles');
         Gate::define('users.edit.roles.super_admin', 'Mschlueter\Backend\Policies\UserPolicy@editRolesSuperAdmin');
 
         Gate::define('users.destroy', 'Mschlueter\Backend\Policies\UserPolicy@destroy');
