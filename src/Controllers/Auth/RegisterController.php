@@ -71,7 +71,14 @@ class RegisterController extends Controller
             return redirect()->route('backend.login')->withErrors(['It is not allowed to register.']);
         }
 
+        if(config('backend.activate_user_after_registration') === true) {
+            $active = true;
+        } else {
+            $active = false;
+        }
+
         return User::create([
+            'active' => $active,
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
