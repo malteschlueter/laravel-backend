@@ -47,6 +47,8 @@ class ChangePasswordController extends Controller
 
         $user->save();
 
-        return redirect()->route('backend.user')->with('message', trans('backend::auth.passwords.change.messages.success'));
+        return redirect()
+            ->route('backend.user.edit', $user)
+            ->with('message', trans('backend::auth.passwords.change.messages.success'));
     }
 }
