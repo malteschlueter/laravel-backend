@@ -60,14 +60,14 @@ class CreateUserCommand extends Command {
 
         $user->notify(new UserCreated($token));
 
-        $this->info('New user created. The password link was send via email.');
+        $this->info(trans('backend::console.user.create.response'));
     }
 
     protected function askName() {
 
         do {
 
-            $this->user['name'] = $this->ask('Please type in a name.');
+            $this->user['name'] = $this->ask(trans('backend::console.user.create.ask.name'));
 
             /* @var \Illuminate\Validation\Validator $validator */
             $validator = Validator::make($this->user, [
@@ -88,7 +88,7 @@ class CreateUserCommand extends Command {
 
     protected function askRole() {
 
-        $this->user['role'] = $this->choice('Please choose a role.', [
+        $this->user['role'] = $this->choice(trans('backend::console.user.create.ask.role'), [
             Role::SUPER_ADMIN => 'Superadmin',
             Role::ADMIN => 'Admin',
             Role::USER => 'User',
@@ -99,7 +99,7 @@ class CreateUserCommand extends Command {
 
         do {
 
-            $this->user['email'] = $this->ask('Please type in a email address.');
+            $this->user['email'] = $this->ask(trans('backend::console.user.create.ask.email'));
 
             /* @var \Illuminate\Validation\Validator $validator */
             $validator = Validator::make($this->user, [
